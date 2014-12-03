@@ -19,6 +19,8 @@ bc_pc_emu_c.exe : bc_pc_emu_c.o app_timer.o hal.o
 	$(CC) -o bc_pc_emu_c.exe bc_pc_emu_c.o app_timer.o hal.o
 
 
+clean:
+	rm -f bc_pc_emu_c.exe bc_pc_emu_c.o app_timer.o hal.o
 
 
 ##########################################################
