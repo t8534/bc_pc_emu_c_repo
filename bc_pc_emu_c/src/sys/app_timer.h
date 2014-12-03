@@ -10,7 +10,7 @@
 
 
 #include <stdint.h>
-#include "types.h" // todo: is it needed ?
+#include "type_def.h" // todo: is it needed ?
 
 void APPTIMER_TimerInit(void);
 void APPTIMER_TimerDeinit(void);

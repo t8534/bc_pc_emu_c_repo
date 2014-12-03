@@ -6,7 +6,7 @@
  */
 
 #include <stdint.h>
-#include "types.h" // todo: is it needed ?
+#include "type_def.h" // todo: is it needed ?
 
 //todo example of calculate
     /* NOTE! Resolution 32[us]. */
