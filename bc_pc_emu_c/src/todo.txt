@@ -1,7 +1,8 @@
 1.
 Set project skeleton correctly:
 
-- build printf() with stdio.h library.
+DONE - build printf() with stdio.h library.
+ 
 - build into build folder for win32
 
 

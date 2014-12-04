@@ -23,6 +23,7 @@ clean:
 	rm -f bc_pc_emu_c.exe bc_pc_emu_c.o app_timer.o hal.o
 
 
+
 ##########################################################
 ### Working base 
 
@@ -47,12 +48,5 @@ clean:
 #	$(CC) -o vario_emu_pc.exe vario_emu_pc.o display.o BP085.o sensor.o sound.o app_timer.o hal.o calc.o
 
 
-################################################
-### Example from eclipse executable c
-
-# -O0 -g3 -Wall -c -fmessage-length=0
-# C:/MinGW/include
-# C:/MinGW/lib/gcc/mingw32/4.5.0/include
-# C:/MinGW/lib/gcc/mingw32/4.5.0/include-fixed
 
 
