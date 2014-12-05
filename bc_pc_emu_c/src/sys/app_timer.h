@@ -15,7 +15,7 @@
 void APPTIMER_TimerInit(void);
 void APPTIMER_TimerDeinit(void);
 void APPTIMER_TimerIRS(void);
-void APPTIMER_TimerSetPeriod(uint16_t period);
+void APPTIMER_TimerSetPeriod(uint16_t period_ms);
 void APPTIMER_TimerStart(void);
 void APPTIMER_TimerStop(void);
 

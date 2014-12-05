@@ -30,7 +30,7 @@ void APPTIMER_TimerIRS(void)
 }
 
 
-void APPTIMER_TimerSetPeriod(uint16_t period)
+void APPTIMER_TimerSetPeriod(uint16_t period_ms)
 {
 
 }
