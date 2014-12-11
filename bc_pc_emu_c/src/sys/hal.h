@@ -26,30 +26,36 @@
 
 
 
+/* HW board initialization */
+void HAL_BoardInit(void);
+void HAL_BoardDeinit(void);
+
+
 /* Main Application Timer */
-void HAL_AppTimerInit(void);
-void HAL_AppTimerDeinit(void);
-void HAL_AppTimerIRS(void);
-void HAL_AppTimerSetPeriod(uint16_t period);
-void HAL_AppTimerStart(void);
-void HAL_AppTimerStop(void);
+void HAL_SysTickTimerInit(void);
+void HAL_SysTickTimerDeinit(void);
+void HAL_SysTickTimerIRSHandler(void);
+void HAL_SysTickTimerSetPeriod(uint32_t period_ms);
+void HAL_SysTickTimerStart(void);
+void HAL_SysTickTimerStop(void);
 
 
 /* PWM generator used for sound frequency generate */
 void HAL_PWMInit(void);
 void HAL_PWMDeinit(void);
-void HAL_PWMSetCycle(uint16_t cycle);
+void HAL_PWMSetPeriod(uint16_t cycle);
+void HAL_PWMSetDuty(uint16_t cycle);
 void HAL_PWMStart(void);
 void HAL_PWMStop(void);
 
 
 /* The sound duration timer */
-void HAL_SoundTimerInit(void);
-void HAL_SoundTimerDeinit(void);
-void HAL_SoundTimerIRS(void);
-void HAL_SoundTimerSetPeriod(uint16_t period);
-void HAL_SoundTimerStart(void);
-void HAL_SoundTimerStop(void);
+void HAL_Timer1Init(void);
+void HAL_Timer1Deinit(void);
+void HAL_Timer1IRS(void);
+void HAL_Timer1SetPeriod(uint32_t period_ms);
+void HAL_Timer1Start(void);
+void HAL_Timer1Stop(void);
 
 
 /* Serial port for debug purposes */

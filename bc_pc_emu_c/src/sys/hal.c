@@ -32,37 +32,62 @@
 */
 
 
+/* HW board initialization */
+void HAL_BoardInit(void)
+{
+	//For LPC*
+
+	//SystemCoreClockUpdate();
+
+	//Board_Init();
+
+	// Call all peripherials initialization
+
+
+	//For PC
+
+	// Initialize SDL library, and other pc related modules.
+
+}
+
+void HAL_BoardDeinit(void)
+{
+
+}
+
+
+
 /* The main application timer. Hardware layer
  *
  * Expected period length: todo
  *
  */
-void HAL_AppTimerInit()
+void HAL_SysTickTimerInit()
 {
 
 }
 
-void HAL_AppTimerDeinit()
+void HAL_SysTickTimerDeinit()
 {
 	// Switch power of timer off here
 }
 
-void HAL_AppTimerIRS()
+void HAL_SysTickTimerIRSHandler()
 {
 
 }
 
-void HAL_AppTimerSetPeriod(uint16_t period)
+void HAL_SysTickTimerSetPeriod(uint32_t period_ms)
 {
 
 }
 
-void HAL_AppTimerStart()
+void HAL_SysTickTimerStart()
 {
 
 }
 
-void HAL_AppTimerStop()
+void HAL_SysTickTimerStop()
 {
 
 }
@@ -85,10 +110,17 @@ void HAL_PWMDeinit()
 }
 
 
-void HAL_PWMSetCycle(uint16_t cycle)
+void HAL_PWMSetPeriod(uint16_t period)
 {
 
 }
+
+
+void HAL_PWMSetDuty(uint16_t period)
+{
+
+}
+
 
 void HAL_PWMStart()
 {
@@ -105,33 +137,33 @@ void HAL_PWMStop()
  * The sound duration timer
  *
  */
-void HAL_SoundTimerInit()
+void HAL_Timer1Init()
 {
 
 }
 
-void HAL_SoundTimerDeinit()
+void HAL_Timer1Deinit()
 {
 	// power off
 }
 
 
-void HAL_SoundTimerIRS()
+void HAL_Timer1IRS()
 {
 
 }
 
-void HAL_SoundTimerSetPeriod(uint16_t period)
+void HAL_Timer1SetPeriod(uint32_t period_ms)
 {
 
 }
 
-void HAL_SoundTimerStart()
+void HAL_Timer1Start()
 {
 
 }
 
-void HAL_SoundTimerStop()
+void HAL_Timer1Stop()
 {
 
 }
