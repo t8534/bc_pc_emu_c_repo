@@ -1,5 +1,6 @@
 # headers subdirs
-IDIRS = -I. -I./sys
+IDIRS = -I. -I"C:/MinGW/include" -I"C:/MinGW/include/lib/gcc/mingw32/4.5.0/include" -I"C:/MinGW/include/lib/gcc/mingw32/4.5.0/include-fixed" -I./libs/sdl/include -I./libs/sdl/include/SDL -I./sys
+#IDIRS = -I. -I./libs/sdl/include/SDL -I./sys
 
 CC=gcc   
 CFLAGS=-c -Wall $(IDIRS) 
@@ -8,10 +9,13 @@ CFLAGS=-c -Wall $(IDIRS)
 #CXXFLAGS=-c -Wall $(IDIRS) 
 
 LDFLAGS=
-LDLIBS=
+#LDLIBS= -L./libs/sdl/include -L./libs/sdl/include/SDL -L./libs/sdl/libs -lSDLmain -lSDL
+LDLIBS= -L./libs/sdl/libs -lmingw32 -lSDLmain -lSDL 
+#LDLIBS= -lmingw32
+
 
 # all source subdirs for linker and compilator
-VPATH = ./ sys 
+VPATH = ./ sys libs libs/sdl libs/sdl/libs
 
 all : bc_pc_emu_c.exe
 

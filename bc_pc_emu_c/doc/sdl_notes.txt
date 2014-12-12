@@ -1,0 +1,35 @@
+
+To work on .exe the SDL.dll is necessery, created during lib compilation.
+ 
+
+http://lazyfoo.net/SDL_tutorials/lesson01/windows/mingw/index.php
+
+http://lazyfoo.net/SDL_tutorials/lesson01/windows/eclipse/index.php
+
+http://mingw-starter.blogspot.com/2008/02/mingw-sdl.html
+
+https://users.cs.jmu.edu/bernstdh/web/common/help/cpp_mingw-sdl-setup.php
+
+http://lazyfoo.net/SDL_tutorials/lesson01/windows/index.php
+
+
+---------------------------------------------------------
+1. Problem
+
+gcc    -c -Wall -I. -I./libs/sdl/include/SDL -I./sys    -c -o bc_pc_emu_c.o bc_pc_emu_c.c
+bc_pc_emu_c.c:24:5: error: conflicting types for 'SDL_main'
+./libs/sdl/include/SDL/SDL_main.h:57:22: note: previous declaration of 'SDL_main' was here
+make: *** [bc_pc_emu_c.o] Error 1
+
+See:
+
+http://stackoverflow.com/questions/11976084/why-sdl-defines-main-macro
+
+SDL kas a hack and you should use 
+
+int main(int argc, char* argv[])
+
+in place of 
+
+int main(void)
+
