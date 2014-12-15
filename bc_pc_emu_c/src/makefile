@@ -1,6 +1,6 @@
 # headers subdirs
-IDIRS = -I. -I"C:/MinGW/include" -I"C:/MinGW/include/lib/gcc/mingw32/4.5.0/include" -I"C:/MinGW/include/lib/gcc/mingw32/4.5.0/include-fixed" -I./libs/sdl/include -I./libs/sdl/include/SDL -I./sys
-#IDIRS = -I. -I./libs/sdl/include/SDL -I./sys
+#IDIRS = -I. -I"C:/MinGW/include" -I"C:/MinGW/include/lib/gcc/mingw32/4.5.0/include" -I"C:/MinGW/include/lib/gcc/mingw32/4.5.0/include-fixed" -I./libs/sdl/include -I./libs/sdl/include/SDL -I./sys
+IDIRS = -I. -I./libs/sdl/include -I./libs/sdl/include/SDL -I./sys
 
 CC=gcc   
 CFLAGS=-c -Wall $(IDIRS) 
@@ -13,14 +13,16 @@ LDFLAGS=
 LDLIBS= -L./libs/sdl/libs -lmingw32 -lSDLmain -lSDL 
 #LDLIBS= -lmingw32
 
+%.o: %.c
+	$(CC) $(CFLAGS) $<
 
 # all source subdirs for linker and compilator
-VPATH = ./ sys libs libs/sdl libs/sdl/libs
+VPATH = ./ libs libs/sdl libs/sdl/libs sys
 
 all : bc_pc_emu_c.exe
 
 bc_pc_emu_c.exe : bc_pc_emu_c.o app_timer.o hal.o  
-	$(CC) -o bc_pc_emu_c.exe bc_pc_emu_c.o app_timer.o hal.o
+	$(CC) $(LDLIBS) -o bc_pc_emu_c.exe bc_pc_emu_c.o app_timer.o hal.o
 
 
 clean:

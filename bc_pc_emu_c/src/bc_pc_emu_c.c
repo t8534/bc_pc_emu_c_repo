@@ -31,7 +31,6 @@ int main(int argc, char* argv[])
 	//puts("Hello");
 	printf("Hello. This is SDL test \n");
 
-/*
     SDL_Surface *screen;
     //SDL_Event event;
 
@@ -40,12 +39,11 @@ int main(int argc, char* argv[])
 
     if (SDL_Init(SDL_INIT_VIDEO) < 0 ) return 1;
 
-    if (!(screen = SDL_SetVideoMode(WIDTH, HEIGHT, DEPTH, SDL_FULLSCREEN|SDL_HWSURFACE)))
-    {
+//    if (!(screen = SDL_SetVideoMode(WIDTH, HEIGHT, DEPTH, SDL_FULLSCREEN|SDL_HWSURFACE)))
+//    {
         SDL_Quit();
-        return 1;
-    }
-*/
+//        return 1;
+//    }
 
 	return EXIT_SUCCESS;
 }
