@@ -1,0 +1,134 @@
+
+Begin:
+
+
+// What is real init.
+uint8_t u8g_Init(u8g_t *u8g, u8g_dev_t *dev)  // Init used on SDL example
+
+u8g_InitComFn(&u8g, &u8g_dev_ssd1351_128x128_hicolor_hw_spi, u8g_com_hw_spi_fn);  // Init used on LPC1114 example.
+    u8g_init_data(u8g_t *u8g)
+        return u8g_Begin(u8g)
+            u8g_InitLL(u8g, u8g->dev)
+                u8g_call_dev_fn(u8g, dev, U8G_DEV_MSG_INIT, NULL) -> u8g_dev_ssd1351_128x128_hicolor_fn(u8g_t *u8g, u8g_dev_t *dev, uint8_t msg, void *arg)
+                    u8g_InitCom(u8g, dev, U8G_SPI_CLK_CYCLE_50NS)
+                        dev->com_fn(u8g, U8G_COM_MSG_INIT, clk_cycle_time, NULL) -> u8g_com_hw_spi_fn(u8g_t *u8g, uint8_t msg, uint8_t arg_val, void *arg_ptr)
+                            spi_init(uint32_t ns) (u8g_arm.c)
+
+                    u8g_WriteEscSeqP(u8g, dev, u8g_dev_ssd1351_128x128_init_seq)
+                        u8g_WriteByte(u8g, dev, value)
+                            dev->com_fn(u8g, U8G_COM_MSG_WRITE_BYTE, val, NULL)
+
+
+
+u8g_InitComFn(&u8g, &u8g_dev_ssd1351_128x128_hicolor_hw_spi, u8g_com_hw_spi_fn);
+
+/* special init for pure ARM systems */
+uint8_t u8g_InitComFn(u8g_t *u8g, u8g_dev_t *dev, u8g_com_fnptr com_fn)
+
+
+typedef struct _u8g_t u8g_t;
+struct _u8g_t
+{
+  u8g_uint_t width;
+  u8g_uint_t height;
+  
+  
+  u8g_dev_t *dev;               /* first device in the device chain */
+  const u8g_pgm_uint8_t *font;             /* regular font for all text procedures */
+  const u8g_pgm_uint8_t *cursor_font;  /* special font for cursor procedures */
+  uint8_t cursor_fg_color, cursor_bg_color;
+  uint8_t cursor_encoding;
+  uint8_t mode;                         /* display mode, one of U8G_MODE_xxx */
+  u8g_uint_t cursor_x;
+  u8g_uint_t cursor_y;
+  u8g_draw_cursor_fn cursor_fn;
+  
+  int8_t glyph_dx;
+  int8_t glyph_x;
+  int8_t glyph_y;
+  uint8_t glyph_width;
+  uint8_t glyph_height;
+  
+  u8g_font_calc_vref_fnptr font_calc_vref;
+  uint8_t font_height_mode;
+  int8_t font_ref_ascent;
+  int8_t font_ref_descent;
+  uint8_t font_line_spacing_factor;     /* line_spacing = factor * (ascent - descent) / 64 */
+  uint8_t line_spacing;
+  
+  u8g_dev_arg_pixel_t arg_pixel;
+  /* uint8_t color_index; */
+
+#ifdef U8G_WITH_PINLIST
+  uint8_t pin_list[U8G_PIN_LIST_LEN];
+#endif
+  
+  u8g_state_cb state_cb;
+  
+  u8g_box_t current_page;		/* current box of the visible page */
+
+};
+
+
+
+typedef struct _u8g_dev_t u8g_dev_t;
+struct _u8g_dev_t
+{
+  u8g_dev_fnptr dev_fn;         /* device procedure */
+  void *dev_mem;                /* device memory */
+  u8g_com_fnptr com_fn;         /* communication procedure */
+};
+
+
+/* device prototype */
+typedef uint8_t (*u8g_dev_fnptr)(u8g_t *u8g, u8g_dev_t *dev, uint8_t msg, void *arg);
+
+
+
+/* com prototype */
+typedef uint8_t (*u8g_com_fnptr)(u8g_t *u8g, uint8_t msg, uint8_t arg_val, void *arg_ptr);
+
+Possible messages (msg) for u8g_com_fnptr() are:
+
+#define U8G_COM_MSG_STOP        0
+#define U8G_COM_MSG_INIT        1
+
+#define U8G_COM_MSG_ADDRESS 2
+
+/* CHIP_SELECT argument: number of the chip which needs to be activated, so this is more like high active */
+#define U8G_COM_MSG_CHIP_SELECT 3
+
+#define U8G_COM_MSG_RESET 4
+
+#define U8G_COM_MSG_WRITE_BYTE 5
+#define U8G_COM_MSG_WRITE_SEQ 6
+#define U8G_COM_MSG_WRITE_SEQ_P 7
+
+See, there is no way to read data from display.
+
+--------------------------------------
+RaspPi.
+
+TODO:
+
+1.
+There is a communication function, as below, but there is no example to run RaspPi
+examples.
+
+2.
+Create Hello world example:
+- There is communication function ready, see below: u8g_com_raspberrypi_hw_spi_fn()
+  This function is used to communicate with display.
+- Create subdirectory at ./sys and makefile example in there (get lpc as example, and SDL maybe)
+- Check at first is SPI communication working.
+- Select display available for me.
+- Create the rest of example:
+  - Prepare initialization parameters as in example with LPC1114.
+
+
+
+Communication function for RaspPi
+
+
+uint8_t u8g_com_raspberrypi_hw_spi_fn(u8g_t *u8g, uint8_t msg, uint8_t arg_val, void *arg_ptr)  // u8g_com_raspberrypi_hw_spi.c
+
